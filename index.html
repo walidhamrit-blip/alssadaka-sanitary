@@ -1,0 +1,1168 @@
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alssadaka - Premium Brassware & Sanitary Solutions</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sopalBlue: '#00529b',
+                        sopalRed: '#e30613',
+                        sopalDark: '#1a1a1a',
+                        sopalGray: '#f4f4f4'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        arabic: ['Cairo', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts (Inter & Cairo) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Ken Burns Zoom Effect for Carousel */
+        @keyframes kenburns {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.15); }
+        }
+        .zoom-active {
+            animation: kenburns 10s ease-out forwards;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #00529b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #e30613;
+        }
+        /* Smooth RTL adjustments */
+        [dir="rtl"] .rtl-flip {
+            transform: scaleX(-1);
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50 text-gray-800 overflow-x-hidden" id="body-root">
+
+    <!-- Top Info Bar -->
+    <div class="bg-sopalBlue text-white text-xs py-2 px-4 md:px-12 flex justify-between items-center border-b border-blue-700">
+        <div class="flex items-center space-x-4 rtl:space-x-reverse" id="top-contact-info">
+            <!-- Dynamic Top Contact Elements -->
+        </div>
+        <div class="flex items-center space-x-6 rtl:space-x-reverse">
+            <!-- Language Selector -->
+            <div class="flex items-center space-x-2 rtl:space-x-reverse">
+                <button onclick="setLanguage('en')" id="btn-lang-en" class="hover:text-sopalRed transition font-semibold">EN</button>
+                <span class="text-gray-400">|</span>
+                <button onclick="setLanguage('ar')" id="btn-lang-ar" class="hover:text-sopalRed transition font-semibold font-arabic">العربية</button>
+            </div>
+            <!-- Admin Panel Trigger -->
+            <button onclick="toggleAdminPanel()" class="bg-sopalRed hover:bg-red-700 text-white px-3 py-1 rounded text-xs font-bold transition flex items-center gap-1">
+                <i class="fa-solid fa-user-gear"></i> <span data-key="adminBtn">Admin Panel</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur shadow-md transition-all duration-300">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <!-- Logo Section -->
+            <a href="#" class="flex items-center space-x-2 rtl:space-x-reverse">
+                <div class="text-2xl md:text-3xl font-extrabold text-sopalBlue tracking-wider flex items-center">
+                    <span class="text-sopalRed mr-1 rtl:ml-1"><i class="fa-solid fa-handshake"></i></span>
+                    <span id="logo-text">ALSSADAKA</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation Menu -->
+            <nav class="hidden md:flex items-center space-x-8 rtl:space-x-reverse font-semibold text-sm tracking-wide">
+                <a href="#home" class="text-sopalBlue hover:text-sopalRed transition" data-key="navHome">Home</a>
+                <a href="#catalog" class="text-sopalBlue hover:text-sopalRed transition" data-key="navCatalog">Catalog</a>
+                <a href="#about" class="text-sopalBlue hover:text-sopalRed transition" data-key="navAbout">About Us</a>
+                <a href="#contact" class="text-sopalBlue hover:text-sopalRed transition" data-key="navContact">Contact</a>
+            </nav>
+
+            <!-- Quick Action Buttons -->
+            <div class="hidden md:flex items-center space-x-4 rtl:space-x-reverse">
+                <a href="#catalog" class="border-2 border-sopalBlue text-sopalBlue hover:bg-sopalBlue hover:text-white px-5 py-2 rounded-full text-xs font-bold uppercase transition duration-300" data-key="viewProductsBtn">
+                    View Catalog
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button onclick="toggleMobileMenu()" class="md:hidden text-sopalBlue text-2xl focus:outline-none">
+                <i class="fa-solid fa-bars" id="mobile-menu-icon"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200 px-6 py-4 space-y-4">
+            <a href="#home" onclick="toggleMobileMenu()" class="block text-sopalBlue hover:text-sopalRed font-semibold py-2" data-key="navHome">Home</a>
+            <a href="#catalog" onclick="toggleMobileMenu()" class="block text-sopalBlue hover:text-sopalRed font-semibold py-2" data-key="navCatalog">Catalog</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="block text-sopalBlue hover:text-sopalRed font-semibold py-2" data-key="navAbout">About Us</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block text-sopalBlue hover:text-sopalRed font-semibold py-2" data-key="navContact">Contact</a>
+            <div class="pt-4 border-t border-gray-100 flex flex-col gap-3">
+                <a href="#catalog" onclick="toggleMobileMenu()" class="text-center bg-sopalBlue text-white py-2.5 rounded text-sm font-bold uppercase" data-key="viewProductsBtn">View Catalog</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Hero Carousel Section -->
+    <section id="home" class="relative h-[85vh] md:h-[90vh] bg-black overflow-hidden">
+        <!-- Slides Container -->
+        <div id="carousel-slides" class="relative w-full h-full">
+            <!-- Dynamic slides inserted here by JavaScript -->
+        </div>
+
+        <!-- Hero Overlay Details (Persistent Design Accents) -->
+        <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent pointer-events-none"></div>
+
+        <!-- Carousel Indicators -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 rtl:space-x-reverse z-30" id="carousel-indicators">
+            <!-- Dynamic indicators inserted here -->
+        </div>
+
+        <!-- Carousel Navigation Controls -->
+        <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-sopalRed hover:text-white text-white p-3 rounded-full transition z-30 backdrop-blur-sm rtl-flip">
+            <i class="fa-solid fa-chevron-left text-xl"></i>
+        </button>
+        <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-sopalRed hover:text-white text-white p-3 rounded-full transition z-30 backdrop-blur-sm rtl-flip">
+            <i class="fa-solid fa-chevron-right text-xl"></i>
+        </button>
+    </section>
+
+    <!-- Brands & Core Values Sopal-style Bar -->
+    <section class="bg-white py-8 border-b border-gray-200">
+        <div class="container mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div class="p-4 border-r border-gray-100 last:border-0 flex flex-col items-center">
+                <div class="text-sopalBlue text-3xl mb-2"><i class="fa-solid fa-award"></i></div>
+                <h4 class="font-bold text-sm uppercase text-gray-800" data-key="valQuality">100% Certified Quality</h4>
+                <p class="text-xs text-gray-500 mt-1" data-key="valQualityDesc">Meets global standards</p>
+            </div>
+            <div class="p-4 border-r border-gray-100 last:border-0 flex flex-col items-center">
+                <div class="text-sopalBlue text-3xl mb-2"><i class="fa-solid fa-droplet"></i></div>
+                <h4 class="font-bold text-sm uppercase text-gray-800" data-key="valEco">Eco-Friendly Flow</h4>
+                <p class="text-xs text-gray-500 mt-1" data-key="valEcoDesc">Optimized water conservation</p>
+            </div>
+            <div class="p-4 border-r border-gray-100 last:border-0 flex flex-col items-center">
+                <div class="text-sopalBlue text-3xl mb-2"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                <h4 class="font-bold text-sm uppercase text-gray-800" data-key="valWarranty">5-Year Warranty</h4>
+                <p class="text-xs text-gray-500 mt-1" data-key="valWarrantyDesc">On all premium products</p>
+            </div>
+            <div class="p-4 border-r border-gray-100 last:border-0 flex flex-col items-center">
+                <div class="text-sopalBlue text-3xl mb-2"><i class="fa-solid fa-truck-fast"></i></div>
+                <h4 class="font-bold text-sm uppercase text-gray-800" data-key="valSupport">Dedicated Support</h4>
+                <p class="text-xs text-gray-500 mt-1" data-key="valSupportDesc">Fast delivery & assistance</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Structured Product Catalog Section -->
+    <section id="catalog" class="py-20 bg-sopalGray">
+        <div class="container mx-auto px-4">
+            <!-- Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-sopalRed font-bold tracking-wider text-xs uppercase" data-key="catalogSub">Exclusive Collection</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-sopalBlue mt-2" data-key="catalogTitle">Our Sanitary & Brassware Catalog</h2>
+                <div class="w-16 h-1 bg-sopalRed mx-auto mt-4"></div>
+            </div>
+
+            <!-- Categories Tabs -->
+            <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-12" id="catalog-tabs">
+                <!-- Dynamic tabs loaded here -->
+            </div>
+
+            <!-- Products Grid Container -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8" id="products-grid">
+                <!-- Dynamic products loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section (Sopal Inspired Corporate Presentation) -->
+    <section id="about" class="py-20 bg-white relative overflow-hidden">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Text Content -->
+                <div class="space-y-6">
+                    <span class="text-sopalRed font-bold tracking-wider text-xs uppercase" data-key="aboutSub">Engineering Excellence</span>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-sopalBlue" id="about-heading">About Alssadaka</h2>
+                    <div class="w-16 h-1 bg-sopalRed"></div>
+                    <p class="text-gray-600 leading-relaxed text-sm md:text-base" id="about-text-content">
+                        Alssadaka is a premier manufacturer and distributor of high-quality sanitary fixtures, precision brass valves, and premium bathroom and kitchen mixers. Guided by our commitment to sustainability, innovation, and durability, we engineering beautiful, high-efficiency water solutions for modern homes and commercial projects.
+                    </p>
+                    <div class="grid grid-cols-2 gap-6 pt-4">
+                        <div class="border-l-4 border-sopalBlue pl-4 rtl:border-l-0 rtl:border-r-4 rtl:pr-4">
+                            <span class="block text-2xl font-black text-sopalBlue">25+</span>
+                            <span class="text-xs text-gray-500 uppercase tracking-wider" data-key="aboutStat1">Years Experience</span>
+                        </div>
+                        <div class="border-l-4 border-sopalBlue pl-4 rtl:border-l-0 rtl:border-r-4 rtl:pr-4">
+                            <span class="block text-2xl font-black text-sopalBlue">150+</span>
+                            <span class="text-xs text-gray-500 uppercase tracking-wider" data-key="aboutStat2">Premium Products</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Interactive Media Collage -->
+                <div class="relative h-[350px] md:h-[450px]">
+                    <div class="absolute inset-0 rounded-2xl overflow-hidden shadow-2xl">
+                        <img id="about-image-url" src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80" alt="Alssadaka Manufacturing Facility" class="w-full h-full object-cover">
+                    </div>
+                    <!-- Absolute Decorative Badge -->
+                    <div class="absolute -bottom-6 -left-6 md:bottom-8 md:left-8 bg-sopalRed text-white p-6 rounded-xl shadow-2xl max-w-xs hidden sm:block">
+                        <p class="font-extrabold text-lg uppercase tracking-wide" data-key="badgeTitle">Pure Quality</p>
+                        <p class="text-xs text-white/80 mt-1" data-key="badgeDesc">Engineered with lead-free premium heavy brass for lifetime durability.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-sopalBlue text-white relative">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Info Panel -->
+                <div class="space-y-8">
+                    <div>
+                        <span class="text-sopalRed font-bold tracking-wider text-xs uppercase" data-key="contactSub">Get In Touch</span>
+                        <h2 class="text-3xl md:text-4xl font-extrabold mt-2" data-key="contactTitle">Connect With Our Team</h2>
+                        <div class="w-16 h-1 bg-sopalRed mt-4"></div>
+                    </div>
+                    <p class="text-blue-100" data-key="contactDesc">Have questions about our catalogue, distribution options, or need technical support? Drop us a line.</p>
+                    
+                    <div class="space-y-4 text-sm" id="contact-info-list">
+                        <!-- Dynamic Contact Info List -->
+                    </div>
+                </div>
+
+                <!-- Live Contact Form -->
+                <div class="bg-white text-gray-800 p-8 rounded-2xl shadow-2xl">
+                    <h3 class="text-xl font-bold text-sopalBlue mb-6" data-key="formTitle">Send a Message</h3>
+                    <form onsubmit="handleFormSubmit(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1" data-key="formLabelName">Full Name</label>
+                            <input type="text" required class="w-full px-4 py-3 bg-gray-100 border border-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-sopalBlue" placeholder="Your Name">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1" data-key="formLabelEmail">Email Address</label>
+                            <input type="email" required class="w-full px-4 py-3 bg-gray-100 border border-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-sopalBlue" placeholder="email@example.com">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1" data-key="formLabelMsg">Message</label>
+                            <textarea rows="4" required class="w-full px-4 py-3 bg-gray-100 border border-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-sopalBlue" placeholder="Write details here..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-sopalRed hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition uppercase text-xs tracking-widest" data-key="formSubmitBtn">
+                            Submit Form
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-sopalDark text-white py-12 border-t-4 border-sopalRed">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="space-y-4">
+                <div class="text-2xl font-extrabold text-white tracking-wider flex items-center">
+                    <span class="text-sopalRed mr-1"><i class="fa-solid fa-handshake"></i></span>
+                    <span id="logo-footer-text">ALSSADAKA</span>
+                </div>
+                <p class="text-xs text-gray-400" data-key="footerText">Providing professional high-grade sanitary solutions, designed to match the ultimate elegance of Sopal and customized for your exact modern residential or industrial architectural requirements.</p>
+            </div>
+            <div>
+                <h4 class="text-sm uppercase tracking-widest font-extrabold text-sopalRed mb-4" data-key="footerCatalogHeader">Catalog</h4>
+                <div class="grid grid-cols-1 gap-2 text-xs text-gray-400" id="footer-catalog-links">
+                    <!-- Dynamic categories links -->
+                </div>
+            </div>
+            <div>
+                <h4 class="text-sm uppercase tracking-widest font-extrabold text-sopalRed mb-4" data-key="footerFollow">Follow Us</h4>
+                <div class="flex space-x-4 rtl:space-x-reverse mb-6">
+                    <a href="#" class="text-gray-400 hover:text-white text-lg transition"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white text-lg transition"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white text-lg transition"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+                <p class="text-xs text-gray-500">&copy; <span id="current-year"></span> Alssadaka Group. All Rights Reserved. Inspired by Sopal.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="#" id="floating-whatsapp" target="_blank" class="fixed bottom-6 right-6 bg-[#25d366] hover:bg-[#128c7e] text-white p-4 rounded-full shadow-2xl z-40 transition transform hover:scale-110 flex items-center justify-center text-2xl group duration-300">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span class="absolute right-14 bg-black/80 text-white text-xs px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition whitespace-nowrap shadow pointer-events-none" data-key="whatsappTooltip">
+            Chat on WhatsApp
+        </span>
+    </a>
+
+    <!-- Product Quick View Modal -->
+    <div id="product-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white max-w-2xl w-full rounded-2xl overflow-hidden shadow-2xl relative animate-scale-up">
+            <button onclick="closeProductModal()" class="absolute top-4 right-4 bg-gray-100 hover:bg-sopalRed hover:text-white text-gray-600 w-8 h-8 rounded-full flex items-center justify-center transition z-10">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="grid grid-cols-1 md:grid-cols-2">
+                <div class="h-64 md:h-full bg-gray-100">
+                    <img id="modal-product-image" src="" alt="" class="w-full h-full object-cover">
+                </div>
+                <div class="p-8 flex flex-col justify-between">
+                    <div>
+                        <span id="modal-product-category" class="text-xs font-bold uppercase tracking-widest text-sopalRed">Category</span>
+                        <h3 id="modal-product-name" class="text-2xl font-black text-sopalBlue mt-1">Product Title</h3>
+                        <p id="modal-product-desc" class="text-sm text-gray-600 mt-4 leading-relaxed">Description goes here...</p>
+                    </div>
+                    <div class="pt-6 border-t border-gray-100 mt-6 flex flex-col gap-3">
+                        <a href="#" id="modal-whatsapp-link" target="_blank" class="w-full bg-[#25d366] hover:bg-[#128c7e] text-white text-center py-3 rounded-lg font-bold flex items-center justify-center gap-2 transition text-sm">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> <span data-key="modalInquireBtn">Order / Inquire via WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADMIN PANEL OVERLAY (Fully functional dynamically editable layout) -->
+    <div id="admin-panel" class="fixed inset-y-0 right-0 max-w-lg w-full bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col border-l border-gray-200">
+        <!-- Admin Header -->
+        <div class="bg-sopalBlue text-white p-6 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-user-gear text-xl text-sopalRed"></i>
+                <h3 class="text-lg font-bold">Admin Control Portal</h3>
+            </div>
+            <button onclick="toggleAdminPanel()" class="text-white hover:text-sopalRed text-2xl transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <!-- Admin Navigation Tabs -->
+        <div class="flex border-b border-gray-200 text-xs font-bold uppercase tracking-wider bg-gray-50">
+            <button onclick="switchAdminTab('general')" id="tab-admin-general" class="flex-1 py-3 text-center border-b-2 border-sopalRed text-sopalRed bg-white">General & Contact</button>
+            <button onclick="switchAdminTab('slides')" id="tab-admin-slides" class="flex-1 py-3 text-center border-b-2 border-transparent text-gray-500 hover:text-sopalBlue">Hero Slides</button>
+            <button onclick="switchAdminTab('products')" id="tab-admin-products" class="flex-1 py-3 text-center border-b-2 border-transparent text-gray-500 hover:text-sopalBlue">Products</button>
+        </div>
+
+        <!-- Admin Content Window -->
+        <div class="flex-1 overflow-y-auto p-6 space-y-6">
+            <!-- TAB 1: General & Contact -->
+            <div id="panel-sec-general" class="space-y-4">
+                <h4 class="text-sm font-extrabold uppercase text-gray-500 tracking-wider">Company Identity & Links</h4>
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">Company Brand Name</label>
+                        <input type="text" id="admin-brandName" class="w-full px-3 py-2 border rounded-lg focus:ring-1 focus:ring-sopalBlue text-sm">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 mb-1">Phone Number</label>
+                            <input type="text" id="admin-phone" class="w-full px-3 py-2 border rounded-lg focus:ring-1 focus:ring-sopalBlue text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 mb-1">WhatsApp Number</label>
+                            <input type="text" id="admin-whatsapp" class="w-full px-3 py-2 border rounded-lg focus:ring-1 focus:ring-sopalBlue text-sm">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">Email Address</label>
+                        <input type="email" id="admin-email" class="w-full px-3 py-2 border rounded-lg focus:ring-1 focus:ring-sopalBlue text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">Address (English)</label>
+                        <input type="text" id="admin-address-en" class="w-full px-3 py-2 border rounded-lg focus:ring-1 focus:ring-sopalBlue text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">Address (Arabic)</label>
+                        <input type="text" id="admin-address-ar" class="w-full px-3 py-2 border rounded-lg focus:ring-1 focus:ring-sopalBlue text-sm" dir="rtl">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">About Image URL</label>
+                        <input type="text" id="admin-about-image" class="w-full px-3 py-2 border rounded-lg focus:ring-1 focus:ring-sopalBlue text-sm">
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: Hero Slides Editor -->
+            <div id="panel-sec-slides" class="space-y-6 hidden">
+                <h4 class="text-sm font-extrabold uppercase text-gray-500 tracking-wider">Configure Hero Slides</h4>
+                <div id="admin-slides-list" class="space-y-6">
+                    <!-- Dynamic dynamic slide configuration list inputs -->
+                </div>
+                <button onclick="addNewSlideConfig()" class="w-full bg-sopalBlue/10 hover:bg-sopalBlue text-sopalBlue hover:text-white py-2 rounded-lg text-xs font-bold transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-plus"></i> Add New Slide
+                </button>
+            </div>
+
+            <!-- TAB 3: Product List Editor -->
+            <div id="panel-sec-products" class="space-y-6 hidden">
+                <div class="flex justify-between items-center">
+                    <h4 class="text-sm font-extrabold uppercase text-gray-500 tracking-wider">Catalog & Products</h4>
+                    <button onclick="addNewProductConfig()" class="bg-sopalRed hover:bg-red-700 text-white px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1">
+                        <i class="fa-solid fa-plus"></i> Add New Product
+                    </button>
+                </div>
+                <div id="admin-products-list" class="space-y-4">
+                    <!-- Dynamic Product Config Modules -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Footer Controls -->
+        <div class="bg-gray-50 p-6 border-t border-gray-200 flex space-x-3 rtl:space-x-reverse">
+            <button onclick="saveAdminChanges()" class="flex-1 bg-sopalBlue hover:bg-blue-800 text-white font-bold py-3 rounded-lg text-xs uppercase tracking-wider transition">
+                Save & Apply Changes
+            </button>
+            <button onclick="resetToDefaultData()" class="bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold px-4 rounded-lg text-xs uppercase tracking-wider transition" title="Restore defaults">
+                Reset
+            </button>
+        </div>
+    </div>
+
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Dictionary definitions for Multilingual toggles (Arabic and English)
+        const localDictionary = {
+            en: {
+                adminBtn: "Admin Portal",
+                navHome: "Home",
+                navCatalog: "Catalog",
+                navAbout: "About Us",
+                navContact: "Contact",
+                viewProductsBtn: "View Catalog",
+                valQuality: "100% Certified Quality",
+                valQualityDesc: "Meets global standards",
+                valEco: "Eco-Friendly Flow",
+                valEcoDesc: "Optimized water conservation",
+                valWarranty: "5-Year Warranty",
+                valWarrantyDesc: "On all premium products",
+                valSupport: "Dedicated Support",
+                valSupportDesc: "Fast delivery & assistance",
+                catalogSub: "Exclusive Collection",
+                catalogTitle: "Our Sanitary & Brassware Catalog",
+                aboutSub: "Engineering Excellence",
+                badgeTitle: "Pure Quality",
+                badgeDesc: "Engineered with lead-free premium heavy brass for lifetime durability.",
+                aboutStat1: "Years Experience",
+                aboutStat2: "Premium Products",
+                contactSub: "Get In Touch",
+                contactTitle: "Connect With Our Team",
+                contactDesc: "Have questions about our catalogue, distribution options, or need technical support? Drop us a line.",
+                formTitle: "Send a Message",
+                formLabelName: "Full Name",
+                formLabelEmail: "Email Address",
+                formLabelMsg: "Message",
+                formSubmitBtn: "Submit Form",
+                footerText: "Providing professional high-grade sanitary solutions, designed to match the ultimate elegance of Sopal and customized for your exact modern residential or industrial architectural requirements.",
+                footerCatalogHeader: "Catalog",
+                footerFollow: "Follow Us",
+                whatsappTooltip: "Chat on WhatsApp",
+                modalInquireBtn: "Order / Inquire via WhatsApp",
+                catAll: "All Categories",
+                catBathroom: "Bathroom Fitting",
+                catKitchen: "Kitchen Mixers",
+                catValves: "Brass Valves"
+            },
+            ar: {
+                adminBtn: "لوحة الإدارة",
+                navHome: "الرئيسية",
+                navCatalog: "الكتالوج",
+                navAbout: "من نحن",
+                navContact: "اتصل بنا",
+                viewProductsBtn: "عرض الكتالوج",
+                valQuality: "جودة معتمدة 100٪",
+                valQualityDesc: "تطابق المعايير العالمية",
+                valEco: "تدفق صديق للبيئة",
+                valEcoDesc: "أمثل للحفاظ على المياه",
+                valWarranty: "ضمان لمدة 5 سنوات",
+                valWarrantyDesc: "على جميع المنتجات الفاخرة",
+                valSupport: "دعم مخصص",
+                valSupportDesc: "توصيل سريع ومساعدة مستمرة",
+                catalogSub: "مجموعة حصرية ممتازة",
+                catalogTitle: "كتالوج التجهيزات الصحية والنحاسية",
+                aboutSub: "التميز الهندسي الفاخر",
+                badgeTitle: "جودة نقية 100٪",
+                badgeDesc: "تم تصميمه باستخدام نحاس ثقيل ممتاز خالٍ من الرصاص لمتانة تدوم طويلاً.",
+                aboutStat1: "سنوات من الخبرة",
+                aboutStat2: "منتج فاخر ممتاز",
+                contactSub: "تواصل معنا",
+                contactTitle: "تواصل مع فريقنا الاحترافي",
+                contactDesc: "هل لديك أسئلة حول الكتالوج الخاص بنا، خيارات التوزيع، أو بحاجة لدعم فني؟ تواصل معنا فوراً.",
+                formTitle: "أرسل لنا رسالة",
+                formLabelName: "الاسم الكامل",
+                formLabelEmail: "البريد الإلكتروني",
+                formLabelMsg: "الرسالة التفصيلية",
+                formSubmitBtn: "إرسال النموذج",
+                footerText: "نقدم حلولاً صحية احترافية عالية الجودة، تم تصميمها بدقة لتلبي المعايير المتميزة لشركة Sopal وبما يتناسب تمامًا مع متطلباتك المعمارية السكنية أو الصناعية.",
+                footerCatalogHeader: "أقسام الكتالوج",
+                footerFollow: "تابعنا على",
+                whatsappTooltip: "تواصل عبر الواتساب",
+                modalInquireBtn: "طلب / استفسار عبر واتساب",
+                catAll: "كل الأقسام",
+                catBathroom: "مستلزمات الحمامات",
+                catKitchen: "خلاطات المطابخ",
+                catValves: "صمامات نحاسية"
+            }
+        };
+
+        // Standard Default Data Object simulating the site state
+        const defaultData = {
+            brandName: "ALSSADAKA",
+            phone: "+216 71 854 220",
+            whatsapp: "+21650000000",
+            email: "contact@alssadaka.com",
+            aboutImageUrl: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
+            aboutHeading_en: "About Alssadaka",
+            aboutHeading_ar: "حول الصداقة",
+            aboutText_en: "Alssadaka is a premier manufacturer and distributor of high-quality sanitary fixtures, precision brass valves, and premium bathroom and kitchen mixers. Guided by our commitment to sustainability, innovation, and durability, we engineer beautiful, high-efficiency water solutions for modern homes and commercial projects.",
+            aboutText_ar: "شركة الصداقة هي شركة رائدة في تصنيع وتوزيع التركيبات الصحية عالية الجودة، صمامات النحاس الدقيقة، وخلاطات الحمامات والمطابخ الفاخرة. نسترشد بالتزامنا بالاستدامة والابتكار والمتانة لتصميم حلول مياه عالية الكفاءة للمشاريع السكنية والتجارية الحديثة.",
+            address_en: "Zone Industrielle Mghira, Tunis, Tunisia",
+            address_ar: "المنطقة الصناعية بالمغيرة، تونس، تونس",
+            heroSlides: [
+                {
+                    imageUrl: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1600&q=80",
+                    title_en: "Masterpieces of Pure Flow",
+                    subtitle_en: "Elegant Bathroom Solutions Designed for Modern Luxury Living",
+                    title_ar: "روائع التدفق النقي",
+                    subtitle_ar: "حلول حمامات أنيقة مصممة لتجربة رفاهية عصرية متكاملة"
+                },
+                {
+                    imageUrl: "https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=1600&q=80",
+                    title_en: "Precision Brass Fittings",
+                    subtitle_en: "Industrial Quality Valves and Accessories Crafted for Heavy Durability",
+                    title_ar: "تجهيزات نحاسية متناهية الدقة",
+                    subtitle_ar: "صمامات وملحقات بجودة صناعية فائقة تم ابتكارها لتتحمل الضغط العالي"
+                },
+                {
+                    imageUrl: "https://images.unsplash.com/photo-1613214149874-4f5363448249?auto=format&fit=crop&w=1600&q=80",
+                    title_en: "Sustainable Kitchen Design",
+                    subtitle_en: "Water Saving Mixers with Elegant Anti-corrosive Chrome Finish",
+                    title_ar: "تصاميم مطابخ مستدامة",
+                    subtitle_ar: "خلاطات ذكية لتوفير المياه مع لمعان كروم فائق مقاوم للصدأ والتآكل"
+                }
+            ],
+            categories: [
+                { id: "all", key: "catAll" },
+                { id: "bathroom", key: "catBathroom" },
+                { id: "kitchen", key: "catKitchen" },
+                { id: "valves", key: "catValves" }
+            ],
+            products: [
+                {
+                    id: 1,
+                    category: "bathroom",
+                    imageUrl: "https://images.unsplash.com/photo-1585144860131-245d551c77f6?auto=format&fit=crop&w=600&q=80",
+                    name_en: "Supreme Chrome Basin Mixer",
+                    desc_en: "Premium dual-handle basin mixer boasting anti-lime aerator, sleek premium finish, and integrated eco-flow valve.",
+                    name_ar: "خلاط مغسلة كروم فاخر",
+                    desc_ar: "خلاط مغسلة مزدوج المقبض يتميز بمهوية مقاومة للترسبات، لمسة كروم ناصعة، وصمام توفير مياه ذكي مدمج."
+                },
+                {
+                    id: 2,
+                    category: "bathroom",
+                    imageUrl: "https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=600&q=80",
+                    name_en: "Elite Shower Column Set",
+                    desc_en: "Multi-flow luxury rainfall shower kit equipped with anti-corrosive metal hoses and modern rectangular styling.",
+                    name_ar: "عامود دش فاخر متكامل",
+                    desc_ar: "مجموعة دش مطري فاخرة بفتحات تدفق متعددة وخراطيم معدنية مضادة للصدأ مع تصميم مستطيل عصري فريد."
+                },
+                {
+                    id: 3,
+                    category: "kitchen",
+                    imageUrl: "https://images.unsplash.com/photo-1601924582970-d24f195e09f9?auto=format&fit=crop&w=600&q=80",
+                    name_en: "Flexi-Neck Pull-Out Kitchen Mixer",
+                    desc_en: "Dynamic pull-out kitchen tap with flexible rubber construction, adjustable double stream, and 360 rotation capacity.",
+                    name_ar: "خلاط مطبخ مرن متحرك",
+                    desc_ar: "صنبور مطبخ ديناميكي قابل للسحب مجهز بخرطوم مطاطي مرن، ومعدل تدفق مزدوج مع قدرة دوران كاملة 360 درجة."
+                },
+                {
+                    id: 4,
+                    category: "kitchen",
+                    imageUrl: "https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?auto=format&fit=crop&w=600&q=80",
+                    name_en: "Classic Arch Gooseneck Tap",
+                    desc_en: "Timeless swan-neck kitchen faucet, offering durable ceramic disk cartridge and high-rise arc clearance layout.",
+                    name_ar: "خلاط مطبخ كلاسيكي مقوس",
+                    desc_ar: "خلاط مطبخ كلاسيكي برقبة البجعة المرتفعة، يوفر قلب سيراميك متين طويل الأمد ومساحة استخدام واسعة ومريحة."
+                },
+                {
+                    id: 5,
+                    category: "valves",
+                    imageUrl: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80",
+                    name_en: "Heavy Duty Brass Ball Valve",
+                    desc_en: "Reinforced lead-free heavy brass ball valve for industrial and plumbing projects, rated up to PN25 high pressure.",
+                    name_ar: "صمام نحاسي كروي للخدمة الشاقة",
+                    desc_ar: "محبس كروي من النحاس الثقيل الخالي من الرصاص للمشاريع الصناعية والسباكة، ومصنف لضغط عالي PN25."
+                },
+                {
+                    id: 6,
+                    category: "valves",
+                    imageUrl: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80",
+                    name_en: "Precision Gate Valve Brass PN16",
+                    desc_en: "Threaded high-durability internal flow control gate valve with ergonomic cast iron handling wheel.",
+                    name_ar: "صمام بوابة نحاسي دقيق PN16",
+                    desc_ar: "صمام تحكم داخلي بالبوابة النحاسية شديد المتانة ومسنن بالكامل، مع عجلة تشغيل يدوية مريحة من حديد الزهر."
+                }
+            ]
+        };
+
+        // Initialize Application State (Load from Local Storage or default)
+        let state = JSON.parse(localStorage.getItem('alssadaka_data')) || {...defaultData};
+        let currentLanguage = localStorage.getItem('alssadaka_lang') || 'en';
+        let currentHeroSlideIndex = 0;
+        let selectedCategoryFilter = 'all';
+        let heroInterval;
+
+        // Run Init logic on window load
+        window.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('current-year').innerText = new Date().getFullYear();
+            applyLanguageStyles();
+            renderDynamicSite();
+            initHeroCarousel();
+        });
+
+        // Toggle Language
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            localStorage.setItem('alssadaka_lang', lang);
+            applyLanguageStyles();
+            renderDynamicSite();
+        }
+
+        // Apply visual layout rules based on language (LTR/RTL, font families)
+        function applyLanguageStyles() {
+            const root = document.getElementById('body-root');
+            if (currentLanguage === 'ar') {
+                root.setAttribute('dir', 'rtl');
+                root.classList.remove('font-sans');
+                root.classList.add('font-arabic');
+                
+                // Highlight Language Selector
+                document.getElementById('btn-lang-ar').classList.add('text-sopalRed', 'underline');
+                document.getElementById('btn-lang-en').classList.remove('text-sopalRed', 'underline');
+            } else {
+                root.setAttribute('dir', 'ltr');
+                root.classList.remove('font-arabic');
+                root.classList.add('font-sans');
+
+                // Highlight Language Selector
+                document.getElementById('btn-lang-en').classList.add('text-sopalRed', 'underline');
+                document.getElementById('btn-lang-ar').classList.remove('text-sopalRed', 'underline');
+            }
+        }
+
+        // Master Rendering Engine
+        function renderDynamicSite() {
+            // Apply logo texts
+            document.getElementById('logo-text').innerText = state.brandName;
+            document.getElementById('logo-footer-text').innerText = state.brandName;
+
+            // Apply static multi-lingual text nodes based on current language
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (localDictionary[currentLanguage] && localDictionary[currentLanguage][key]) {
+                    el.innerText = localDictionary[currentLanguage][key];
+                }
+            });
+
+            // Update Top Nav Bar Contact Elements
+            const topContactBox = document.getElementById('top-contact-info');
+            topContactBox.innerHTML = `
+                <a href="tel:${state.phone}" class="hover:text-sopalRed transition flex items-center gap-1.5"><i class="fa-solid fa-phone"></i> <span>${state.phone}</span></a>
+                <span class="hidden sm:inline text-blue-500">|</span>
+                <a href="mailto:${state.email}" class="hidden sm:flex hover:text-sopalRed transition items-center gap-1.5"><i class="fa-solid fa-envelope"></i> <span>${state.email}</span></a>
+            `;
+
+            // Render Hero Carousel Slides
+            const slidesContainer = document.getElementById('carousel-slides');
+            const indicatorsContainer = document.getElementById('carousel-indicators');
+            slidesContainer.innerHTML = '';
+            indicatorsContainer.innerHTML = '';
+
+            state.heroSlides.forEach((slide, idx) => {
+                // Slide Template
+                const slideDiv = document.createElement('div');
+                slideDiv.className = `absolute inset-0 transition-opacity duration-1000 flex items-center px-4 md:px-24 ${idx === currentHeroSlideIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'}`;
+                
+                const title = currentLanguage === 'ar' ? slide.title_ar : slide.title_en;
+                const subtitle = currentLanguage === 'ar' ? slide.subtitle_ar : slide.subtitle_en;
+
+                slideDiv.innerHTML = `
+                    <!-- Zooming Slide BG -->
+                    <div class="absolute inset-0 z-0 bg-cover bg-center ${idx === currentHeroSlideIndex ? 'zoom-active' : ''}" style="background-image: url('${slide.imageUrl}');"></div>
+                    <div class="absolute inset-0 bg-black/60 z-10"></div>
+
+                    <!-- Slide Contents -->
+                    <div class="relative z-20 max-w-3xl text-white space-y-6 animate-fade-in ${currentLanguage === 'ar' ? 'text-right' : 'text-left'}">
+                        <div class="w-12 h-1.5 bg-sopalRed mb-2"></div>
+                        <h1 class="text-3xl sm:text-4xl md:text-6xl font-black tracking-tight leading-tight uppercase font-arabic">${title}</h1>
+                        <p class="text-sm sm:text-lg md:text-xl text-gray-200 leading-relaxed font-light">${subtitle}</p>
+                        <div class="flex flex-wrap gap-4 pt-4">
+                            <a href="#catalog" class="bg-sopalRed hover:bg-red-700 text-white px-8 py-3.5 rounded-full text-xs font-bold uppercase tracking-widest transition duration-300">
+                                ${currentLanguage === 'ar' ? 'عرض الكتالوج' : 'View Products'}
+                            </a>
+                            <a href="#contact" class="bg-white/20 hover:bg-white hover:text-sopalBlue border border-white/40 text-white px-8 py-3.5 rounded-full text-xs font-bold uppercase tracking-widest transition duration-300">
+                                ${currentLanguage === 'ar' ? 'اتصل بنا' : 'Contact Us'}
+                            </a>
+                        </div>
+                    </div>
+                `;
+                slidesContainer.appendChild(slideDiv);
+
+                // Indicator Template
+                const indicator = document.createElement('button');
+                indicator.onclick = () => jumpToSlide(idx);
+                indicator.className = `w-12 h-1.5 rounded transition duration-300 ${idx === currentHeroSlideIndex ? 'bg-sopalRed' : 'bg-white/40'}`;
+                indicatorsContainer.appendChild(indicator);
+            });
+
+            // About Section Content Customizations
+            document.getElementById('about-heading').innerText = currentLanguage === 'ar' ? state.aboutHeading_ar : state.aboutHeading_en;
+            document.getElementById('about-text-content').innerText = currentLanguage === 'ar' ? state.aboutText_ar : state.aboutText_en;
+            document.getElementById('about-image-url').src = state.aboutImageUrl;
+
+            // Render Catalog Tabs
+            const tabsContainer = document.getElementById('catalog-tabs');
+            tabsContainer.innerHTML = '';
+            state.categories.forEach(cat => {
+                const btn = document.createElement('button');
+                btn.onclick = () => filterCatalog(cat.id);
+                const label = localDictionary[currentLanguage][cat.key];
+                
+                if (cat.id === selectedCategoryFilter) {
+                    btn.className = "bg-sopalBlue text-white px-6 py-2.5 rounded-full text-xs font-bold uppercase shadow-lg transition";
+                } else {
+                    btn.className = "bg-white text-gray-700 hover:bg-sopalBlue/10 px-6 py-2.5 rounded-full text-xs font-semibold uppercase shadow-sm transition";
+                }
+                btn.innerText = label;
+                tabsContainer.appendChild(btn);
+            });
+
+            // Render Product Grid
+            const gridContainer = document.getElementById('products-grid');
+            gridContainer.innerHTML = '';
+            
+            const filteredProducts = selectedCategoryFilter === 'all' 
+                ? state.products 
+                : state.products.filter(p => p.category === selectedCategoryFilter);
+
+            filteredProducts.forEach(prod => {
+                const name = currentLanguage === 'ar' ? prod.name_ar : prod.name_en;
+                const desc = currentLanguage === 'ar' ? prod.desc_ar : prod.desc_en;
+
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-xl shadow-md overflow-hidden group hover:shadow-2xl transition duration-300 border border-gray-100 flex flex-col justify-between";
+                card.innerHTML = `
+                    <div>
+                        <!-- Zoom Product Image Wrap -->
+                        <div class="relative h-64 bg-gray-100 overflow-hidden">
+                            <img src="${prod.imageUrl}" alt="${name}" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center gap-2">
+                                <button onclick='openProductModal(${JSON.stringify(prod).replace(/'/g, "\\'")})' class="bg-white hover:bg-sopalRed hover:text-white text-sopalBlue px-4 py-2 rounded-lg text-xs font-bold transition flex items-center gap-1.5 shadow">
+                                    <i class="fa-solid fa-magnifying-glass"></i> Quick View
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <span class="text-[10px] font-black uppercase text-sopalRed tracking-widest">${prod.category}</span>
+                            <h3 class="font-bold text-gray-900 mt-1 line-clamp-1 group-hover:text-sopalBlue transition text-base">${name}</h3>
+                            <p class="text-xs text-gray-500 mt-2 line-clamp-2 leading-relaxed">${desc}</p>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-2">
+                        <button onclick='openProductModal(${JSON.stringify(prod).replace(/'/g, "\\'")})' class="w-full bg-sopalBlue/5 hover:bg-sopalRed group-hover:bg-sopalBlue text-sopalBlue hover:text-white group-hover:text-white font-bold py-2.5 rounded-lg text-xs uppercase transition duration-300 flex items-center justify-center gap-2">
+                            <span>More Details</span> <i class="fa-solid fa-arrow-right text-[10px] rtl-flip"></i>
+                        </button>
+                    </div>
+                `;
+                gridContainer.appendChild(card);
+            });
+
+            // Contact Info List Column
+            const contactInfoList = document.getElementById('contact-info-list');
+            contactInfoList.innerHTML = `
+                <div class="flex items-start space-x-4 rtl:space-x-reverse">
+                    <div class="bg-white/10 p-3 rounded-lg text-sopalRed text-lg"><i class="fa-solid fa-location-dot"></i></div>
+                    <div>
+                        <h4 class="font-bold text-xs uppercase text-gray-300 tracking-wider">${currentLanguage === 'ar' ? 'العنوان' : 'Headquarters Address'}</h4>
+                        <p class="mt-1 text-sm text-blue-100">${currentLanguage === 'ar' ? state.address_ar : state.address_en}</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4 rtl:space-x-reverse">
+                    <div class="bg-white/10 p-3 rounded-lg text-sopalRed text-lg"><i class="fa-solid fa-phone"></i></div>
+                    <div>
+                        <h4 class="font-bold text-xs uppercase text-gray-300 tracking-wider">${currentLanguage === 'ar' ? 'الهاتف المباشر' : 'Direct Phone'}</h4>
+                        <p class="mt-1 text-sm text-blue-100">${state.phone}</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4 rtl:space-x-reverse">
+                    <div class="bg-white/10 p-3 rounded-lg text-sopalRed text-lg"><i class="fa-solid fa-envelope"></i></div>
+                    <div>
+                        <h4 class="font-bold text-xs uppercase text-gray-300 tracking-wider">${currentLanguage === 'ar' ? 'البريد الإلكتروني' : 'Customer Support Email'}</h4>
+                        <p class="mt-1 text-sm text-blue-100">${state.email}</p>
+                    </div>
+                </div>
+            `;
+
+            // Footer Catalog Navigation Links
+            const footerCatLinks = document.getElementById('footer-catalog-links');
+            footerCatLinks.innerHTML = '';
+            state.categories.forEach(cat => {
+                if(cat.id === 'all') return;
+                const link = document.createElement('a');
+                link.href = "#catalog";
+                link.onclick = () => filterCatalog(cat.id);
+                link.className = "hover:text-white transition uppercase";
+                link.innerText = localDictionary[currentLanguage][cat.key];
+                footerCatLinks.appendChild(link);
+            });
+
+            // Update Floating WhatsApp Widget Link
+            const floatWA = document.getElementById('floating-whatsapp');
+            const cleanWANumber = state.whatsapp.replace(/[^0-9]/g, '');
+            const welcomeText = encodeURIComponent(currentLanguage === 'ar' ? "مرحبا شركة الصداقة، أود الاستفسار عن منتجاتكم الممتازة." : "Hello Alssadaka, I would like to inquire about your premium catalogue items.");
+            floatWA.href = `https://api.whatsapp.com/send?phone=${cleanWANumber}&text=${welcomeText}`;
+        }
+
+        // Hero Autoplay Controls
+        function initHeroCarousel() {
+            clearInterval(heroInterval);
+            heroInterval = setInterval(() => {
+                nextSlide();
+            }, 6000);
+        }
+
+        function nextSlide() {
+            currentHeroSlideIndex = (currentHeroSlideIndex + 1) % state.heroSlides.length;
+            renderDynamicSite();
+        }
+
+        function prevSlide() {
+            currentHeroSlideIndex = (currentHeroSlideIndex - 1 + state.heroSlides.length) % state.heroSlides.length;
+            renderDynamicSite();
+        }
+
+        function jumpToSlide(idx) {
+            currentHeroSlideIndex = idx;
+            renderDynamicSite();
+            initHeroCarousel(); // restart countdown
+        }
+
+        // Mobile Menu Trigger
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('mobile-menu-icon');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                icon.className = "fa-solid fa-xmark";
+            } else {
+                menu.classList.add('hidden');
+                icon.className = "fa-solid fa-bars";
+            }
+        }
+
+        // Catalog Filter
+        function filterCatalog(categoryId) {
+            selectedCategoryFilter = categoryId;
+            renderDynamicSite();
+        }
+
+        // Product Modal Opening & Close with prefilled WhatsApp specific request text
+        function openProductModal(prod) {
+            const modal = document.getElementById('product-modal');
+            const pName = currentLanguage === 'ar' ? prod.name_ar : prod.name_en;
+            const pDesc = currentLanguage === 'ar' ? prod.desc_ar : prod.desc_en;
+
+            document.getElementById('modal-product-image').src = prod.imageUrl;
+            document.getElementById('modal-product-category').innerText = prod.category;
+            document.getElementById('modal-product-name').innerText = pName;
+            document.getElementById('modal-product-desc').innerText = pDesc;
+
+            // Generate WhatsApp click to buy for this specific product
+            const cleanWANumber = state.whatsapp.replace(/[^0-9]/g, '');
+            const messageStr = encodeURIComponent(currentLanguage === 'ar' 
+                ? `السلام عليكم، أود الحصول على تفاصيل إضافية والطلب بخصوص: "${pName}" (فئة: ${prod.category})` 
+                : `Hello Alssadaka, I am interested in inquiring and ordering this item: "${pName}" (Category: ${prod.category})`
+            );
+            document.getElementById('modal-whatsapp-link').href = `https://api.whatsapp.com/send?phone=${cleanWANumber}&text=${messageStr}`;
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeProductModal() {
+            const modal = document.getElementById('product-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Form Submit Alert
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const notificationStr = currentLanguage === 'ar' 
+                ? "شكراً لك! تم إرسال رسالتك بنجاح، وسيتواصل معك أحد وكلائنا قريباً." 
+                : "Thank you! Your message has been sent successfully. Our support agents will connect with you soon.";
+            alert(notificationStr);
+            e.target.reset();
+        }
+
+        // ==========================================
+        //  ADMIN CONTROL PANEL LOGIC & WORKFLOWS
+        // ==========================================
+        
+        function toggleAdminPanel() {
+            const adminPanel = document.getElementById('admin-panel');
+            if (adminPanel.classList.contains('translate-x-full')) {
+                // Populate inputs with latest active state before opening
+                loadAdminFormFields();
+                adminPanel.classList.remove('translate-x-full');
+            } else {
+                adminPanel.classList.add('translate-x-full');
+            }
+        }
+
+        function switchAdminTab(tabName) {
+            // Hide all sections
+            document.getElementById('panel-sec-general').classList.add('hidden');
+            document.getElementById('panel-sec-slides').classList.add('hidden');
+            document.getElementById('panel-sec-products').classList.add('hidden');
+
+            // Reset tab boundaries style
+            document.getElementById('tab-admin-general').className = "flex-1 py-3 text-center border-b-2 border-transparent text-gray-500 hover:text-sopalBlue";
+            document.getElementById('tab-admin-slides').className = "flex-1 py-3 text-center border-b-2 border-transparent text-gray-500 hover:text-sopalBlue";
+            document.getElementById('tab-admin-products').className = "flex-1 py-3 text-center border-b-2 border-transparent text-gray-500 hover:text-sopalBlue";
+
+            // Show active tab & highlights
+            if (tabName === 'general') {
+                document.getElementById('panel-sec-general').classList.remove('hidden');
+                document.getElementById('tab-admin-general').className = "flex-1 py-3 text-center border-b-2 border-sopalRed text-sopalRed bg-white font-bold";
+            } else if (tabName === 'slides') {
+                document.getElementById('panel-sec-slides').classList.remove('hidden');
+                document.getElementById('tab-admin-slides').className = "flex-1 py-3 text-center border-b-2 border-sopalRed text-sopalRed bg-white font-bold";
+                renderAdminSlidesList();
+            } else if (tabName === 'products') {
+                document.getElementById('panel-sec-products').classList.remove('hidden');
+                document.getElementById('tab-admin-products').className = "flex-1 py-3 text-center border-b-2 border-sopalRed text-sopalRed bg-white font-bold";
+                renderAdminProductsList();
+            }
+        }
+
+        // Set inputs fields to current global variables
+        function loadAdminFormFields() {
+            document.getElementById('admin-brandName').value = state.brandName;
+            document.getElementById('admin-phone').value = state.phone;
+            document.getElementById('admin-whatsapp').value = state.whatsapp;
+            document.getElementById('admin-email').value = state.email;
+            document.getElementById('admin-address-en').value = state.address_en;
+            document.getElementById('admin-address-ar').value = state.address_ar;
+            document.getElementById('admin-about-image').value = state.aboutImageUrl;
+        }
+
+        // Render Hero Slides configurator inputs list
+        function renderAdminSlidesList() {
+            const list = document.getElementById('admin-slides-list');
+            list.innerHTML = '';
+            state.heroSlides.forEach((slide, idx) => {
+                const module = document.createElement('div');
+                module.className = "bg-gray-50 p-4 rounded-xl border border-gray-200 relative space-y-3";
+                module.innerHTML = `
+                    <button onclick="removeSlideConfig(${idx})" class="absolute top-2 right-2 text-gray-400 hover:text-sopalRed transition text-sm">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                    <span class="text-[10px] font-black uppercase text-sopalBlue">Slide #${idx + 1}</span>
+                    <div class="space-y-2">
+                        <div>
+                            <label class="block text-[10px] uppercase font-bold text-gray-500">Slide Image URL</label>
+                            <input type="text" value="${slide.imageUrl}" onchange="updateSlideValue(${idx}, 'imageUrl', this.value)" class="w-full px-2.5 py-1.5 border rounded text-xs">
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-[10px] uppercase font-bold text-gray-500">Title (EN)</label>
+                                <input type="text" value="${slide.title_en}" onchange="updateSlideValue(${idx}, 'title_en', this.value)" class="w-full px-2.5 py-1.5 border rounded text-xs">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] uppercase font-bold text-gray-500">Title (AR)</label>
+                                <input type="text" value="${slide.title_ar}" onchange="updateSlideValue(${idx}, 'title_ar', this.value)" class="w-full px-2.5 py-1.5 border rounded text-xs text-right" dir="rtl">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-[10px] uppercase font-bold text-gray-500">Subtitle (EN)</label>
+                                <input type="text" value="${slide.subtitle_en}" onchange="updateSlideValue(${idx}, 'subtitle_en', this.value)" class="w-full px-2.5 py-1.5 border rounded text-xs">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] uppercase font-bold text-gray-500">Subtitle (AR)</label>
+                                <input type="text" value="${slide.subtitle_ar}" onchange="updateSlideValue(${idx}, 'subtitle_ar', this.value)" class="w-full px-2.5 py-1.5 border rounded text-xs text-right" dir="rtl">
+                            </div>
+                        </div>
+                    </div>
+                `;
+                list.appendChild(module);
+            });
+        }
+
+        function updateSlideValue(idx, field, val) {
+            state.heroSlides[idx][field] = val;
+        }
+
+        function addNewSlideConfig() {
+            state.heroSlides.push({
+                imageUrl: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1600&q=80",
+                title_en: "New Elegance Model",
+                subtitle_en: "Exquisite details of premium heavy chrome finish fittings",
+                title_ar: "نموذج أناقة جديد",
+                subtitle_ar: "تفاصيل رائعة لتجهيزات الكروم الفاخرة الثقيلة"
+            });
+            renderAdminSlidesList();
+        }
+
+        function removeSlideConfig(idx) {
+            if (state.heroSlides.length <= 1) {
+                alert("You must keep at least one slide.");
+                return;
+            }
+            state.heroSlides.splice(idx, 1);
+            if (currentHeroSlideIndex >= state.heroSlides.length) {
+                currentHeroSlideIndex = 0;
+            }
+            renderAdminSlidesList();
+        }
+
+        // Render Product items configuration parameters lists
+        function renderAdminProductsList() {
+            const list = document.getElementById('admin-products-list');
+            list.innerHTML = '';
+            state.products.forEach((prod, idx) => {
+                const module = document.createElement('div');
+                module.className = "bg-gray-50 p-4 rounded-xl border border-gray-200 relative space-y-3";
+                module.innerHTML = `
+                    <button onclick="removeProductConfig(${idx})" class="absolute top-2 right-2 text-gray-400 hover:text-sopalRed transition text-sm">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                    <div class="flex items-center gap-2">
+                        <img src="${prod.imageUrl}" class="w-10 h-10 object-cover rounded border">
+                        <div>
+                            <span class="text-[10px] font-black uppercase text-sopalBlue">Product #${prod.id}</span>
+                            <p class="text-xs font-bold text-gray-800 line-clamp-1">${currentLanguage === 'ar' ? prod.name_ar : prod.name_en}</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2 pt-1">
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-[10px] uppercase font-bold text-gray-500">Category</label>
+                                <select onchange="updateProductValue(${idx}, 'category', this.value)" class="w-full px-2 py-1 border rounded text-xs bg-white">
+                                    <option value="bathroom" ${prod.category === 'bathroom' ? 'selected' : ''}>Bathroom Fitting</option>
+                                    <option value="kitchen" ${prod.category === 'kitchen' ? 'selected' : ''}>Kitchen Mixers</option>
+                                    <option value="valves" ${prod.category === 'valves' ? 'selected' : ''}>Brass Valves</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] uppercase font-bold text-gray-500">Product Image URL</label>
+                                <input type="text" value="${prod.imageUrl}" onchange="updateProductValue(${idx}, 'imageUrl', this.value)" class="w-full px-2.5 py-1 border rounded text-xs">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-[10px] uppercase font-bold text-gray-500">Name (EN)</label>
+                                <input type="text" value="${prod.name_en}" onchange="updateProductValue(${idx}, 'name_en', this.value)" class="w-full px-2.5 py-1 border rounded text-xs">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] uppercase font-bold text-gray-500">Name (AR)</label>
+                                <input type="text" value="${prod.name_ar}" onchange="updateProductValue(${idx}, 'name_ar', this.value)" class="w-full px-2.5 py-1 border rounded text-xs text-right" dir="rtl">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-[10px] uppercase font-bold text-gray-500">Description (EN)</label>
+                                <textarea rows="2" onchange="updateProductValue(${idx}, 'desc_en', this.value)" class="w-full px-2.5 py-1 border rounded text-xs">${prod.desc_en}</textarea>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] uppercase font-bold text-gray-500">Description (AR)</label>
+                                <textarea rows="2" onchange="updateProductValue(${idx}, 'desc_ar', this.value)" class="w-full px-2.5 py-1 border rounded text-xs text-right" dir="rtl">${prod.desc_ar}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                list.appendChild(module);
+            });
+        }
+
+        function updateProductValue(idx, field, val) {
+            state.products[idx][field] = val;
+        }
+
+        function addNewProductConfig() {
+            const newId = state.products.length > 0 ? Math.max(...state.products.map(p => p.id)) + 1 : 1;
+            state.products.unshift({
+                id: newId,
+                category: "bathroom",
+                imageUrl: "https://images.unsplash.com/photo-1585144860131-245d551c77f6?auto=format&fit=crop&w=600&q=80",
+                name_en: "New Premium Basin Mixer Model",
+                desc_en: "Elite engineering with polished rustproof design architecture.",
+                name_ar: "موديل خلاط مغسلة متميز جديد",
+                desc_ar: "تصاميم هندسية متميزة مع هيكلية حماية مصقولة مضادة للصدأ."
+            });
+            renderAdminProductsList();
+        }
+
+        function removeProductConfig(idx) {
+            if (confirm("Are you sure you want to delete this product?")) {
+                state.products.splice(idx, 1);
+                renderAdminProductsList();
+            }
+        }
+
+        // Apply changes to layout and save in local storage
+        function saveAdminChanges() {
+            // General Details Elements
+            state.brandName = document.getElementById('admin-brandName').value.toUpperCase();
+            state.phone = document.getElementById('admin-phone').value;
+            state.whatsapp = document.getElementById('admin-whatsapp').value;
+            state.email = document.getElementById('admin-email').value;
+            state.address_en = document.getElementById('admin-address-en').value;
+            state.address_ar = document.getElementById('admin-address-ar').value;
+            state.aboutImageUrl = document.getElementById('admin-about-image').value;
+
+            // Commit to Local Storage
+            localStorage.setItem('alssadaka_data', JSON.stringify(state));
+
+            // Force Re-render layouts
+            renderDynamicSite();
+            initHeroCarousel();
+
+            // Notify user
+            alert("Congratulations! All modifications have been applied to the live site dynamically!");
+            toggleAdminPanel();
+        }
+
+        // Reset memory configurations instantly
+        function resetToDefaultData() {
+            if (confirm("Are you sure you want to restore default demo configurations? Your custom modifications will be lost.")) {
+                state = {...defaultData};
+                localStorage.removeItem('alssadaka_data');
+                loadAdminFormFields();
+                renderDynamicSite();
+                initHeroCarousel();
+                alert("Site configuration reset completed successfully!");
+                toggleAdminPanel();
+            }
+        }
+    </script>
+</body>
+</html>
